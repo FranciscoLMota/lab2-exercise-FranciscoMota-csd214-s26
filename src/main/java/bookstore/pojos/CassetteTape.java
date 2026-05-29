@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class CassetteTape extends PhysicalMusicFormat {
     private boolean hasAutoReverse = false;
 
-    public CassetteTape(String title, Date dateOfRelease, String artist, double playbackDurationMinutes, boolean hasAutoReverse) {
-        super(title, dateOfRelease, artist, playbackDurationMinutes);
+    public CassetteTape(String title, String dateOfRelease, String artist, double playbackDurationMinutes, double price, int copies,  boolean hasAutoReverse) {
+        super(title, dateOfRelease, artist, playbackDurationMinutes, price, copies);
         this.hasAutoReverse = hasAutoReverse;
     }
 
@@ -17,7 +17,7 @@ public class CassetteTape extends PhysicalMusicFormat {
 
     }
 
-    public boolean isHasAutoReverse() {
+    public boolean getHasAutoReverse() {
         return hasAutoReverse;
     }
 
@@ -63,6 +63,8 @@ public class CassetteTape extends PhysicalMusicFormat {
 
     @Override
     public void sellItem() {
+        super.sellItem();
         System.out.println("Selling Cassette:  " + getTitle() + " by " + getArtist() + " for " + getPrice());
+        IO.println("Remaining stock:" + getCopies());
     }
 }

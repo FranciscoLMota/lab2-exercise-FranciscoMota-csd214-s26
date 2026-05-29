@@ -307,7 +307,7 @@ public class App {
             cat.setArtist(faker.rockBand().name());
             cat.setTitle(faker.music().instrument());
             cat.setHasAutoReverse(faker.bool().bool());
-            cat.setDateOfRelease(faker.date().birthday());
+            cat.setDateOfRelease(faker.date().birthday().toString());
             cat.setPlaybackDurationMinutes(faker.number().numberBetween(0, 1000));
             addItem(cat);
 
@@ -315,7 +315,7 @@ public class App {
             VinylRecord vin = new VinylRecord();
             vin.setArtist(faker.rockBand().name());
             vin.setTitle(faker.music().instrument());
-            vin.setDateOfRelease(faker.date().birthday());
+            vin.setDateOfRelease(faker.date().birthday().toString());
             vin.setPlaybackDurationMinutes(faker.number().numberBetween(0, 1000));
             vin.setRecordSizeInches(faker.number().numberBetween(10, 40));
             vin.setRotationsPerMinute(faker.number().numberBetween(0, 500));

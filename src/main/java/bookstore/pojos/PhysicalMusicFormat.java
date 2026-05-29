@@ -9,16 +9,19 @@ public abstract class PhysicalMusicFormat extends Product {
     private double playbackDurationMinutes;
     private String title;
     private String artist;
-    private Date dateOfRelease;
+    private String dateOfRelease;
     private double price;
+    private int copies;
 
     public PhysicalMusicFormat() {}
 
-    public PhysicalMusicFormat(String title, Date dateOfRelease, String artist, double playbackDurationMinutes) {
+    public PhysicalMusicFormat(String title, String dateOfRelease, String artist, double playbackDurationMinutes, double price, int copies) {
         this.title = title;
         this.dateOfRelease = dateOfRelease;
         this.artist = artist;
         this.playbackDurationMinutes = playbackDurationMinutes;
+        this.price = price;
+        this.copies = copies;
     }
 
     public double getPlaybackDurationMinutes() {
@@ -37,11 +40,11 @@ public abstract class PhysicalMusicFormat extends Product {
         this.artist = artist;
     }
 
-    public Date getDateOfRelease() {
+    public String getDateOfRelease() {
         return dateOfRelease;
     }
 
-    public void setDateOfRelease(Date dateOfRelease) {
+    public void setDateOfRelease(String dateOfRelease) {
         this.dateOfRelease = dateOfRelease;
     }
 
@@ -70,6 +73,14 @@ public abstract class PhysicalMusicFormat extends Product {
         this.price = price;
     }
 
+    public int getCopies() {
+        return copies;
+    }
+
+    public void setCopies(int copies) {
+        this.copies = copies;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -90,6 +101,7 @@ public abstract class PhysicalMusicFormat extends Product {
                 ", artist='" + artist + '\'' +
                 ", dateOfRelease=" + dateOfRelease +
                 ", price=" + price +
+                ", copies=" + copies +
                 '}';
     }
 
@@ -102,13 +114,16 @@ public abstract class PhysicalMusicFormat extends Product {
         this.artist = getInput(input, "artist");
 
         System.out.println("Enter duration of playback (in Minutes):");
-        this.playbackDurationMinutes = getInput(input, 0);
+        this.playbackDurationMinutes = getInput(input, 0.0);
 
         System.out.println("Enter Release Date (dd-MM-yyyy):");
-        this.dateOfRelease = getInput(input, new Date());
+        this.dateOfRelease = getInput(input, "01-01-1999");
 
         System.out.println("Enter price:");
         this.price = getInput(input, 0.0);
+
+        System.out.println("Enter copies:");
+        this.copies = getInput(input, 0);
     }
 
     @Override
@@ -127,5 +142,13 @@ public abstract class PhysicalMusicFormat extends Product {
 
         System.out.println("Edit Price [" + this.price + "]:");
         this.price = getInput(input, this.price);
+
+        System.out.println("Edit Copies [" + this.copies + "]:");
+        this.copies = getInput(input, this.copies);
+    }
+
+    @Override
+    public void sellItem() {
+        this.setCopies(this.getCopies() - 1);
     }
 }

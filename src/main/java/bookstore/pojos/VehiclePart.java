@@ -7,13 +7,15 @@ import java.util.Scanner;
 public abstract class VehiclePart extends Product {
     private String manufacturer = "";
     private double price = 0.0;
+    private int copies = 0;
 
-    public VehiclePart() {
-    }
 
-    public VehiclePart(String manufacturer, double price) {
+    public VehiclePart() {}
+
+    public VehiclePart(String manufacturer, double price, int copies) {
         this.manufacturer = manufacturer;
         this.price = price;
+        this.copies = copies;
     }
 
     public String getManufacturer() {
@@ -27,6 +29,20 @@ public abstract class VehiclePart extends Product {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public double getPrice() {
+        return this.price;
+    }
+
+    public int getCopies() {
+        return copies;
+    }
+
+    public void setCopies(int copies) {
+        this.copies = copies;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -46,6 +62,7 @@ public abstract class VehiclePart extends Product {
         return "VehiclePart{" +
                 "manufacturer='" + manufacturer + '\'' +
                 ", price=" + price +
+                ", copies=" + copies +
                 '}';
     }
 
@@ -56,6 +73,9 @@ public abstract class VehiclePart extends Product {
 
         System.out.println("Enter price:");
         this.price = getInput(input, 0.0);
+
+        System.out.println("Enter copies:");
+        this.copies = getInput(input, 0);
     }
 
 
@@ -66,12 +86,14 @@ public abstract class VehiclePart extends Product {
 
         System.out.println("Edit Price [" + this.price + "]:");
         this.price = getInput(input, this.price);
-    }
 
+        System.out.println("Edit Copies [" + this.copies + "]:");
+        this.copies = getInput(input, this.copies);
+    }
 
     @Override
-    public double getPrice() {
-        return this.price;
-    }
+    public void sellItem() {
+        this.setCopies(this.getCopies() - 1);
 
+    }
 }

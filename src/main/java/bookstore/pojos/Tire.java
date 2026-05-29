@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class Tire extends VehiclePart{
     private  int diameter = 0;
-    public Tire(String manufacturer, double price, int diameter) {
-        super(manufacturer, price);
+    public Tire(String manufacturer, double price, int stock, int diameter) {
+        super(manufacturer, price, stock);
         this.diameter = diameter;
     }
 
@@ -63,6 +63,8 @@ public class Tire extends VehiclePart{
 
     @Override
     public void sellItem() {
+        super.sellItem();
         System.out.println("Selling Tire: Diameter " + diameter + " by " + getManufacturer() + " for " + getPrice());
+        IO.println("Remaining stock:" + getCopies());
     }
 }

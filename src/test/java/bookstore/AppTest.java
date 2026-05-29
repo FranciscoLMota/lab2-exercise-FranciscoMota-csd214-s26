@@ -59,4 +59,84 @@ class AppTest {
         assertNotNull(result);
         assertEquals("Dune Messiah", ((Book)result).getTitle());
     }
+
+    @Test
+    void testAppFlow_AddCassette() {
+        // 1. Build the Clean Script
+        StringBuilder script = new StringBuilder();
+
+        // --- ADD VINYL ---
+        script.append("1\n");             // Main Menu: Add Items
+        script.append("7\n");             // Add Menu: Add Cassette
+        script.append("Hedonista\n");     // Title
+        script.append("Clarissa\n");      // Artist
+        script.append("45.3\n");          // Playback Minutes
+        script.append("25-02-2022\n");    // Release Date
+        script.append("25.0\n");         // Price
+        script.append("3\n");             // Copies
+        script.append("false\n");         // hasAutoReverse
+        script.append("99\n");            // Exit Add Menu
+
+        // --- QUIT ---
+        script.append("99\n");            // Quit
+
+
+        // 2. Inject
+        System.setIn(new ByteArrayInputStream(script.toString().getBytes()));
+
+        // 3. Run
+        App app = new App() {
+            @Override
+            public void populate() { /* clean start */ }
+        };
+        app.run();
+
+        // 4. Verify
+        CassetteTape expected = new CassetteTape("Hedonista", "25-02-2022", "Clarissa", 45.3, 25.0, 3, false);
+        SaleableItem result = app.findItem(expected);
+
+        assertNotNull(result);
+        assertEquals("Hedonista", ((CassetteTape)result).getTitle());
+
+    }
+
+    @Test
+    void testAppFlow_AddVinylRecord() {
+        // 1. Build the Clean Script
+        StringBuilder script = new StringBuilder();
+
+        // --- ADD VINYL ---
+        script.append("1\n");             // Main Menu: Add Items
+        script.append("8\n");             // Add Menu: Add Cassette
+        script.append("Hedonista\n");     // Title
+        script.append("Clarissa\n");      // Artist
+        script.append("45.3\n");          // Playback Minutes
+        script.append("25-02-2022\n");    // Release Date
+        script.append("25.0\n");          // Price
+        script.append("3\n");             // Copies
+        script.append("12\n");            // Size in inches
+        script.append("33\n");            //
+        script.append("99\n");            // Exit Add Menu
+
+        // --- QUIT ---
+        script.append("99\n");            // Quit
+
+        // 2. Inject
+        System.setIn(new ByteArrayInputStream(script.toString().getBytes()));
+
+        // 3. Run
+        App app = new App() {
+            @Override
+            public void populate() { /* clean start */ }
+        };
+        app.run();
+
+        // 4. Verify
+        VinylRecord expected = new VinylRecord("Hedonista", "25-02-2022", "Clarissa", 45.3, 25.0, 3, 12, 33);
+        SaleableItem result = app.findItem(expected);
+
+        assertNotNull(result);
+        assertEquals("Hedonista", ((VinylRecord)result).getTitle());
+
+    }
 }

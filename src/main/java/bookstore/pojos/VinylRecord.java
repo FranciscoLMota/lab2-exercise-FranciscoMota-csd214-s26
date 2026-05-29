@@ -11,8 +11,8 @@ public class VinylRecord extends PhysicalMusicFormat{
 
     public VinylRecord() {}
 
-    public VinylRecord(String title, Date dateOfRelease, String artist, double playbackDurationMinutes, int recordSizeInches, int rotationsPerMinute) {
-        super(title, dateOfRelease, artist, playbackDurationMinutes);
+    public VinylRecord(String title, String dateOfRelease, String artist, double playbackDurationMinutes, double price, int copies, int recordSizeInches, int rotationsPerMinute) {
+        super(title, dateOfRelease, artist, playbackDurationMinutes, price, copies);
         this.recordSizeInches = recordSizeInches;
         this.rotationsPerMinute = rotationsPerMinute;
     }
@@ -80,6 +80,8 @@ public class VinylRecord extends PhysicalMusicFormat{
 
     @Override
     public void sellItem() {
+        super.sellItem();
         System.out.println("Selling Vinyl Record:  " + getTitle() + " by " + getArtist() + " for " + getPrice());
+        IO.println("Remaining stock:" + getCopies());
     }
 }

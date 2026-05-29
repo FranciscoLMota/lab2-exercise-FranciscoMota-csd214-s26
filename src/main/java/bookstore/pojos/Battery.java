@@ -9,8 +9,8 @@ public class Battery extends VehiclePart {
     public Battery() {
     }
 
-    public Battery(String manufacturer, double price, int coldCrankingAmps) {
-        super(manufacturer, price);
+    public Battery(String manufacturer, double price, int stock, int coldCrankingAmps) {
+        super(manufacturer, price, stock);
         this.coldCrankingAmps = coldCrankingAmps;
     }
 
@@ -60,6 +60,8 @@ public class Battery extends VehiclePart {
 
     @Override
     public void sellItem() {
+        super.sellItem();
         System.out.println("Selling Tire: coldCrankingAmps " + coldCrankingAmps + " by " + getManufacturer() + " for " + getPrice());
+        IO.println("Remaining stock:" + getCopies());
     }
 }
